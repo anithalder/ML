@@ -1,4 +1,4 @@
-X,Y
+Features(X),Output(Y)
 1,2
 2,4
 3,5
