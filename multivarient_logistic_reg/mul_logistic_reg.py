@@ -16,11 +16,15 @@ class MultivariateLogisticRegression:
 
     def _compute_cost(self, y_true, y_pred):
         """Compute the binary cross-entropy cost function."""
+
         m = len(y_true)
+
         # Avoid division by zero and log(0) by adding a small value (epsilon)
         epsilon = 1e-15
+
         # Clip predictions to avoid log(0)
         y_pred = np.clip(y_pred, epsilon, 1 - epsilon)
+
         cost = -(1 / m) * np.sum(y_true * np.log(y_pred) +
                                  (1 - y_true) * np.log(1 - y_pred))
         return cost
