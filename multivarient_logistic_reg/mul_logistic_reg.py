@@ -56,15 +56,3 @@ class MultivariateLogisticRegression:
         linear_model = np.dot(X, self.weights) + self.bias
         y_pred = self._sigmoid(linear_model)
         return (y_pred >= threshold).astype(int)
-
-    def accuracy(self, y_true, y_pred):
-        """Compute accuracy of predictions."""
-        return np.mean(y_true == y_pred)
-
-    def plot_cost(self):
-        """Plot the cost over iterations."""
-        plt.plot(range(self.n_iters), self.cost_history)
-        plt.xlabel("Iterations")
-        plt.ylabel("Cost")
-        plt.title("Cost Over Iterations")
-        plt.show()

@@ -3,7 +3,7 @@ import numpy as np
 from dataset_load import load_dataset
 from sklearn.model_selection import train_test_split
 
-from evaluation_visualization import evaluate_model, plot_results
+from evaluation_visualization import evaluate_model
 from logistic_reg import LogisticRegression
 
 X, Y = load_dataset('dataset.csv')
@@ -16,12 +16,12 @@ model.fit(X_train, Y_train)
 Y_pred = model.predict(X_test)
 
 evaluate_model(Y_test, Y_pred)
-# plot_results(X_test, Y_test, Y_pred)
 accuracy = np.mean(Y_test == Y_pred)
-print(f"Accuracy: {accuracy}")
+print(f"Accuracy: {accuracy*100:.2f}%")
 
 # Create a DataFrame with Y_test and Y_pred
 results_df = pd.DataFrame({'Y_test': Y_test, 'Y_pred': Y_pred})
 
-# Print the DataFrame
-print(results_df.head(10))
+# Save the dataset to a CSV file
+np.savetxt("predicted.csv", np.column_stack(
+    (Y_test, Y_pred)), delimiter=",", fmt="%.2f")

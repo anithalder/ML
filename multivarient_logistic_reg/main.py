@@ -1,6 +1,7 @@
-import numpy as np
+# Description: Main file to run the logistic regression model on a sample dataset.
 from dataset_load import load_data
-from mul_linear_reg import MultivariateLogisticRegression
+from mul_logistic_reg import MultivariateLogisticRegression
+from evaluation_visulization import evaluate_model, plot_cost
 
 
 if __name__ == "__main__":
@@ -15,7 +16,7 @@ if __name__ == "__main__":
     #     (X, y)), delimiter=",", fmt="%.2f")
 
     # Load the dataset
-    X, y = load_data("dataset.csv")
+    X, y = load_data("dataset_mul.csv")
 
     # Create and train model
     model = MultivariateLogisticRegression(learning_rate=0.01, n_iters=1000)
@@ -24,9 +25,9 @@ if __name__ == "__main__":
     # Make predictions
     y_pred = model.predict(X)
 
-    # Evaluate model
-    accuracy = model.accuracy(y, y_pred)
-    print(f"Accuracy: {accuracy * 100:.2f}%")
+    print("Predicted values:", y_pred[:5])
+
+    evaluate_model(y, y_pred)
 
     # Plot cost over iterations
-    model.plot_cost()
+    plot_cost(model)
