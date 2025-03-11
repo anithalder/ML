@@ -2,11 +2,25 @@ from svm import SVM_C
 from evaluation import evaluate_model
 from dataset_load import load_dataset
 from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
 
 
-def main():
+def visualize_data(X, y):
+    plt.scatter(X[:, 0], X[:, 1], c=y, cmap='winter')
+    plt.title('Data Visualization')
+    plt.xlabel('Feature 1')
+    plt.ylabel('Feature 2')
+    plt.show()
+
+
+if __name__ == "__main__":
 
     X, y = load_dataset()
+
+    print(X, y)
+
+    # Visualize the data before training
+    visualize_data(X, y)
 
     # Split the dataset into training and testing sets
     X_train, X_test, y_train, y_test = train_test_split(
@@ -25,8 +39,4 @@ def main():
     accuracy = evaluate_model(y_test, y_pred)['Accuracy']
     print(f'Accuracy: {accuracy:.2f}')
 
-    clf.visualize(X_test, y_test, y_pred)
-
-
-if __name__ == "__main__":
-    main()
+    clf.visualize(X_test, y_test)
