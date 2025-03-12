@@ -27,6 +27,8 @@ def main():
     for i in range(len(x)):
         print(f"\n {y_predict[i]:.5f}\t{x[i]}")
 
+    print(y_predict)
+
     plt.scatter(x, y, marker="x", color="black")
     plt.plot(x, y_predict, marker="o", label="y=f(x)")
     plt.xlabel("Score(Independent variable)")

@@ -10,6 +10,7 @@ class LogisticRegression:
 
     def fit(self, X, Y):
         # Initialize weights
+        # Change to X.shape[1] to match the number of features
         self.W = np.zeros(X.shape[1])
         self.b = 0
         m = len(X)
@@ -35,7 +36,8 @@ class LogisticRegression:
     def cost_function(self, Y, Y_pred):
         """Compute the binary cross-entropy loss."""
         n = len(Y)
-        return (-1/n) * np.sum(Y * np.log(Y_pred) + (1 - Y) * np.log(1 - Y_pred))
+        epsilon = 1e-15  # Add epsilon to avoid log(0)
+        return float((-1/n) * np.sum(Y * np.log(Y_pred + epsilon) + (1 - Y) * np.log(1 - Y_pred + epsilon)))
 
     def predict(self, X):
         z = np.dot(X, self.W) + self.b
